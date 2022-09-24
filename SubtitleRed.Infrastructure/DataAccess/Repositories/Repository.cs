@@ -22,11 +22,10 @@ internal abstract class Repository<TEntity> where TEntity : Entity
     protected async Task<Result<TEntity, Error>> GetEntity(Guid id)
     {
         var searchResult = await EntitySet.FindAsync(id);
-        
-        return searchResult is not null ? Result<TEntity, Error>.Success(searchResult) : Result<TEntity, Error>.Failure(new Error
-        {
-            Message = "Item wasn't found by specified id."
-        });
+
+        return searchResult is not null
+            ? Result<TEntity, Error>.Success(searchResult)
+            : Result<TEntity, Error>.Failure(Error.WithMessage("Item wasn't found by specified id."));
     }
 
     protected async Task<Result<TEntity, Error>> CreateEntity(TEntity item)

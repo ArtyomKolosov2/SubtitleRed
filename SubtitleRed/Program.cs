@@ -3,6 +3,7 @@ using SubtitleRed.Infrastructure.DataAccess.Context;
 using SubtitleRed.Infrastructure.DataAccess.Repositories;
 using SubtitleRed.Infrastructure.Identity;
 using SubtitleRed.Infrastructure.Mediatr;
+using SubtitleRed.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,8 +28,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

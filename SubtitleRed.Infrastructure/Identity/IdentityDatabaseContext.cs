@@ -8,6 +8,5 @@ public class IdentityDatabaseContext : IdentityDbContext<IdentityUser<Guid>, Ide
 {
     public IdentityDatabaseContext(DbContextOptions<IdentityDatabaseContext> options) : base(options)
     {
-        Database.EnsureCreated();
     }
 }

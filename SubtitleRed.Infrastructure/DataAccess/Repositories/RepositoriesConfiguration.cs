@@ -8,7 +8,6 @@ public static class RepositoriesConfiguration
     public static IServiceCollection ConfigureRepositories(this IServiceCollection serviceCollection)
     {
         serviceCollection.AddScoped<ISceneRepository, SceneRepository>();
-
         return serviceCollection;
     }
 }
