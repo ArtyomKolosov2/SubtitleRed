@@ -1,6 +1,10 @@
 namespace SubtitleRed.Domain.Locales;
 
-public record LocalizedText(Locale Locale, string Text) : Entity<Guid>
+public class LocalizedText : Entity
 {
+    public string Text { get; set; }
+    
+    public Locale Locale { get; set; }
+    
     public Guid LineId { get; set; }
 }

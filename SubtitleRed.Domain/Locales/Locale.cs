@@ -1,4 +1,9 @@
 
 namespace SubtitleRed.Domain.Locales;
 
-public record Locale(string TwoLetterCode, string LanguageName) : Entity<Guid>;
+public class Locale : Entity
+{
+    public string TwoLetterCode { get; set; }
+    
+    public string LanguageName { get; set; }
+}

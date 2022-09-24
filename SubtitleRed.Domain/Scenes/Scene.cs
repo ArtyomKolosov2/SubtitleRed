@@ -2,4 +2,9 @@ using SubtitleRed.Domain.Sections;
 
 namespace SubtitleRed.Domain.Scenes;
 
-public record Scene(string Name, ISectionsCollection Sections) : Entity<Guid>;
+public class Scene : Entity
+{
+    public string Name { get; set; }
+    
+    public ISectionsCollection Sections { get; set; }
+}

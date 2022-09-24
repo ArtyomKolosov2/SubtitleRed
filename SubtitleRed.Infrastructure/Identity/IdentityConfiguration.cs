@@ -9,7 +9,7 @@ public static class IdentityConfiguration
 {
     public static IServiceCollection ConfigureIdentity(this IServiceCollection serviceCollection, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("IdentityDefaultConnection");
+        var connectionString = configuration["DatabaseSettings:IdentityDefaultConnection"];
         serviceCollection.AddDbContext<IdentityDatabaseContext>(options => options.UseSqlServer(connectionString));
         serviceCollection.AddIdentityCore<IdentityUser<Guid>>(opts =>
             {
