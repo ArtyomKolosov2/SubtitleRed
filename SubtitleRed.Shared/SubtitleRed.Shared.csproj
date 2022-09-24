@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\net6.0\SubtitleRed.Shared.deps.json" />
+    <Content Include="bin\Debug\net6.0\SubtitleRed.Shared.dll" />
+    <Content Include="bin\Debug\net6.0\SubtitleRed.Shared.pdb" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="bin\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="bin\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="bin\**" />
+  </ItemGroup>
+
+</Project>
