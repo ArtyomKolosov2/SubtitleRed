@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SubtitleRed.Application.DTOs;
+using SubtitleRed.Application.Scenes;
 using SubtitleRed.Application.Scenes.Create;
 using SubtitleRed.Shared.Extensions;
 

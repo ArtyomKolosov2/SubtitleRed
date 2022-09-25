@@ -4,9 +4,9 @@ namespace SubtitleRed.Domain.Locales;
 
 public interface ILocalizedTextCollection : IReadOnlyCollection<LocalizedText>
 {
-    Result<LocalizedText, Error> AddLocalizedText(LocalizedText section);
+    Task<Result<LocalizedText, Error>> AddLocalizedText(LocalizedText section);
 
-    Result<LocalizedText, Error> RemoveLocalizedText(LocalizedText section);
+    Task<Result<LocalizedText, Error>> RemoveLocalizedText(LocalizedText section);
 
-    Result<LocalizedText, Error> GetTextByLocale(Locale locale);
+    Task<Result<LocalizedText, Error>> GetTextByLocale(Locale locale);
 }

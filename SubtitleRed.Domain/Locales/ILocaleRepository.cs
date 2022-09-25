@@ -4,5 +4,5 @@ namespace SubtitleRed.Domain.Locales;
 
 public interface ILocaleRepository
 {
-    Result<IEnumerable<Locale>, Error> GetLocales();
+    Task<Result<IEnumerable<Locale>, Error>> GetLocales();
 }

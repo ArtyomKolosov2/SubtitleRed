@@ -13,7 +13,7 @@ public static class IdentityConfiguration
     {
         var connectionString = configuration["DatabaseSettings:IdentityDefaultConnection"];
         serviceCollection.AddDbContext<IdentityDatabaseContext>(options => options.UseSqlServer(connectionString));
-        serviceCollection.AddIdentityCore<IdentityUser<Guid>>(opts =>
+        serviceCollection.AddIdentity<IdentityUser<Guid>, IdentityRole<Guid>>(opts =>
             {
                 opts.Password = new PasswordOptions
                 {

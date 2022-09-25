@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SubtitleRed.Infrastructure.DataAccess.Context;
 using SubtitleRed.Infrastructure.DataAccess.Repositories;
@@ -35,5 +36,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using var scope = app.Services.CreateScope();
+var role = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
+await IdentityRolesInitializer.EnsureStandardRolesCreated(role);
 
 app.Run();

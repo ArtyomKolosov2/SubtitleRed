@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using SubtitleRed.Application.DTOs;
 using SubtitleRed.Domain.Scenes;
 using SubtitleRed.Shared;
 using SubtitleRed.Shared.Extensions;

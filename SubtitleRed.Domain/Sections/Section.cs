@@ -4,9 +4,16 @@ namespace SubtitleRed.Domain.Sections;
 
 public class Section : Entity
 {
-    public ILinesCollection Lines { get; set; }
+    public Section(ILineCollection line, string name, Guid sceneId)
+    {
+        Line = line;
+        Name = name;
+        SceneId = sceneId;
+    }
+
+    public ILineCollection Line { get; }
     
-    public string Name { get; set; }
+    public string Name { get; }
     
-    public Guid SceneId { get; set; }
+    public Guid SceneId { get; }
 }

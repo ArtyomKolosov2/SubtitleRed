@@ -22,11 +22,6 @@ public static class IdentityRolesInitializer
         var isRoleExists = await roleManager.RoleExistsAsync(roleName);
             
         if (!isRoleExists)
-        {
-            await roleManager.CreateAsync(new IdentityRole<Guid>
-            {
-                Name = roleName
-            });
-        }
+            await roleManager.CreateAsync(new IdentityRole<Guid> { Name = roleName });
     }
 }

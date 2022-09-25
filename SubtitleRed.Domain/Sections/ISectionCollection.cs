@@ -2,7 +2,7 @@ using SubtitleRed.Shared;
 
 namespace SubtitleRed.Domain.Sections;
 
-public interface ISectionsCollection : IReadOnlyCollection<Section>
+public interface ISectionCollection : IReadOnlyCollection<Section>
 {
     Result<Section, Error> AddSection(Section section);
 

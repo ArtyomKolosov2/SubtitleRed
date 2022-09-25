@@ -4,7 +4,13 @@ namespace SubtitleRed.Domain.Scenes;
 
 public class Scene : Entity
 {
-    public string Name { get; set; }
+    public Scene(string name, ISectionCollection section)
+    {
+        Name = name;
+        Section = section;
+    }
+
+    public string Name { get; }
     
-    public ISectionsCollection Sections { get; set; }
+    public ISectionCollection Section { get; }
 }

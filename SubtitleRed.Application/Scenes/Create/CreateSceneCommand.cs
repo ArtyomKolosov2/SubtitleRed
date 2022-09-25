@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using SubtitleRed.Application.DTOs;
 using SubtitleRed.Domain.Scenes;
 using SubtitleRed.Domain.Sections;
 using SubtitleRed.Shared;
@@ -13,10 +12,7 @@ public class CreateSceneCommand : IRequest<Result<SceneDto, Error>>
 
     public CreateSceneCommand(SceneDto sceneDto)
     {
-        Scene = new Scene
-        {
-            Name = sceneDto.Name,
-            Sections = new SectionCollection(Enumerable.Empty<Section>())
-        }.Do<Scene>(x => x.SetId(sceneDto.Id));
+        Scene = new Scene(sceneDto.Name!, new SectionCollection(Enumerable.Empty<Section>()))
+            .Do<Scene>(x => x.SetId(sceneDto.Id));
     }
 }

@@ -2,7 +2,7 @@ using SubtitleRed.Shared;
 
 namespace SubtitleRed.Domain.Lines;
 
-public interface ILinesRepository
+public interface ILineRepository
 {
     Task<Result<Line, Error>> CreateLine(Line line);
     

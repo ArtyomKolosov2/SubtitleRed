@@ -3,7 +3,7 @@ using SubtitleRed.Shared;
 
 namespace SubtitleRed.Domain.Sections;
 
-public class SectionCollection : ISectionsCollection
+public class SectionCollection : ISectionCollection
 {
     public int Count => _list.Count;
     

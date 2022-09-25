@@ -6,7 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace SubtitleRed.Infrastructure.Identity.JWT;
 
-public class JwtTokenValidatorService : ISecurityTokenValidator
+internal class JwtTokenValidatorService : ISecurityTokenValidator
 {
     private readonly IConfiguration _configuration;
         
