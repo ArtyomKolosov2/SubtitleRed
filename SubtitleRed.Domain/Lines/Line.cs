@@ -4,16 +4,21 @@ namespace SubtitleRed.Domain.Lines;
 
 public class Line : Entity
 {
-    public Line(string speaker, ILocalizedTextCollection text, Guid sectionId)
+    public Line()
+    {
+        
+    }
+    
+    public Line(string speaker, LocalizedTextCollection text, Guid sectionId)
     {
         Speaker = speaker;
         Text = text;
         SectionId = sectionId;
     }
 
-    public string Speaker { get; } 
-    
-    public ILocalizedTextCollection Text { get; }
-    
-    public Guid SectionId { get; }
+    public string Speaker { get; init; }
+
+    public LocalizedTextCollection Text { get; init; }
+
+    public Guid SectionId { get; init; }
 }

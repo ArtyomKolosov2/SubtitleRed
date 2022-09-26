@@ -4,10 +4,11 @@ using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using SubtitleRed.Shared;
 
 namespace SubtitleRed.Infrastructure.Identity.JWT;
 
-internal class JwtGenerator
+internal class JwtGenerator : IJwtGenerator
 {
     internal const string JwtTokenConfigurationPath = "JwtTokenKey";
     private readonly SymmetricSecurityKey _key;
@@ -17,7 +18,7 @@ internal class JwtGenerator
         _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration[JwtTokenConfigurationPath]));
     }
 
-    public string CreateJwtToken(IdentityUser<Guid> user, IEnumerable<string> userRoles)
+    public Result<string, Error> CreateJwtToken(IdentityUser<Guid> user, IEnumerable<string> userRoles)
     {
         var claims = new List<Claim>
         {
@@ -35,10 +36,10 @@ internal class JwtGenerator
             Expires = DateTime.Now.AddDays(1),
             SigningCredentials = credentials
         };
-            
+
         var tokenHandler = new JwtSecurityTokenHandler();
         var token = tokenHandler.CreateToken(tokenDescriptor);
 
-        return tokenHandler.WriteToken(token);
+        return Result<string, Error>.Success(tokenHandler.WriteToken(token));
     }
 }

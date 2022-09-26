@@ -2,11 +2,11 @@ using SubtitleRed.Shared;
 
 namespace SubtitleRed.Domain.Locales;
 
-public interface ILocalizedTextCollection : IReadOnlyCollection<LocalizedText>
+public interface ILocalizedTextCollection : ICollection<LocalizedText>
 {
-    Task<Result<LocalizedText, Error>> AddLocalizedText(LocalizedText section);
+    Result<LocalizedText, Error> AddLocalizedText(LocalizedText section);
 
-    Task<Result<LocalizedText, Error>> RemoveLocalizedText(LocalizedText section);
+    Result<LocalizedText, Error> RemoveLocalizedText(LocalizedText section);
 
-    Task<Result<LocalizedText, Error>> GetTextByLocale(Locale locale);
+    Result<LocalizedText, Error> GetTextByLocale(Locale locale);
 }

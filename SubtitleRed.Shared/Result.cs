@@ -20,12 +20,12 @@ public class Result<TSuccess, TError> where TError : Error
         Error = failurePayload;
     }
 
-    public static Result<TSuccess, TError> Success(TSuccess successPayload) => 
+    public static Result<TSuccess, TError> Success(TSuccess successPayload) =>
         new(successPayload);
 
-    public static Result<TSuccess, TError> Failure(TError failurePayload) => 
+    public static Result<TSuccess, TError> Failure(TError failurePayload) =>
         new(failurePayload);
 
-    public static implicit operator TSuccess(Result<TSuccess, TError> param) => 
+    public static implicit operator TSuccess(Result<TSuccess, TError> param) =>
         (param.IsSuccess ? param.Data : throw new InvalidOperationException("Invalid state of result. Cast isn't possible."))!;
 }

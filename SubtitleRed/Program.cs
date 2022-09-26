@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using SubtitleRed.Infrastructure.DataAccess.Context;
+using SubtitleRed.Infrastructure.DataAccess;
 using SubtitleRed.Infrastructure.DataAccess.Repositories;
 using SubtitleRed.Infrastructure.Identity;
 using SubtitleRed.Infrastructure.Mediatr;
+using SubtitleRed.Infrastructure.Swagger;
 using SubtitleRed.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,14 +11,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-var connectionString = builder.Configuration["DatabaseSettings:DefaultConnection"];
-builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString, s => s.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
-builder.Services.ConfigureIdentity(builder.Configuration);
-builder.Services.ConfigureMediatr();
-builder.Services.ConfigureRepositories();
+
+builder.Services
+    .ConfigureIdentity(builder.Configuration)
+    .ConfigureMediatr()
+    .ConfigureDatabase(builder.Configuration)
+    .ConfigureRepositories()
+    .ConfigureSwagger();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 

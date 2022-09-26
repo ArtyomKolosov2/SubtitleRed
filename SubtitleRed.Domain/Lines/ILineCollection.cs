@@ -2,7 +2,7 @@ using SubtitleRed.Shared;
 
 namespace SubtitleRed.Domain.Lines;
 
-public interface ILineCollection : IReadOnlyCollection<Line>
+public interface ILineCollection : ICollection<Line>
 {
     Result<Line, Error> AddLine(Line line);
 

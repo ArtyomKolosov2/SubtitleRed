@@ -10,18 +10,12 @@ internal class LineRepository : Repository<Line>, ILineRepository
     {
     }
 
-    public Task<Result<Line, Error>> CreateLine(Line line)
-    {
-        throw new NotImplementedException();
-    }
+    public Task<Result<Line, Error>> CreateLine(Line line) => 
+        CreateEntity(line);
 
-    public Task<Result<Line, Error>> GetLine(Guid id)
-    {
-        throw new NotImplementedException();
-    }
+    public Task<Result<Line, Error>> GetLine(Guid id) => 
+        GetEntity(id);
 
-    public Task<Result<Line, Error>> UpdateLine(Line line)
-    {
-        throw new NotImplementedException();
-    }
+    public Task<Result<Line, Error>> UpdateLine(Line line) => 
+        UpdateEntity(line);
 }

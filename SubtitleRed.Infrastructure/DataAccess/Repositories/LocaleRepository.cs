@@ -10,6 +10,6 @@ internal class LocaleRepository : Repository<Locale>, ILocaleRepository
     {
     }
 
-    public Task<Result<IEnumerable<Locale>, Error>> GetLocales() => 
+    public Task<Result<IEnumerable<Locale>, Error>> GetLocales() =>
         GetEntityList();
 }

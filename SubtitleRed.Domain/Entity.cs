@@ -10,7 +10,7 @@ public abstract class Entity
     {
         if (id == Guid.Empty || Id != Guid.Empty)
             return Result<Guid, Error>.Failure(Error.WithMessage("Given id was empty or id was already set"));
-        
+
         Id = id;
         return Result<Guid, Error>.Success(id);
     }

@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using SubtitleRed.Domain.Locales;
 using SubtitleRed.Infrastructure.DataAccess.Context;
 using SubtitleRed.Shared;
@@ -10,13 +11,18 @@ internal class LocalizedTextRepository : Repository<LocalizedText>, ILocalizedTe
     {
     }
 
-    public Task<Result<LocalizedText, Error>> CreateLocalizedText(LocalizedText localizedText)
-    {
-        throw new NotImplementedException();
-    }
+    public Task<Result<LocalizedText, Error>> CreateLocalizedText(LocalizedText localizedText) =>
+        CreateEntity(localizedText);
 
-    public Task<Result<IEnumerable<LocalizedText>, Error>> GetLocalizedTextByLineId(Guid lineId)
+    public async Task<Result<IEnumerable<LocalizedText>, Error>> GetLocalizedTextByLineId(Guid lineId)
     {
-        throw new NotImplementedException();
+        var localizedTexts = await Context.LocalizedTexts
+            .AsQueryable()
+            .Where(x => x.LineId == lineId)
+            .AsNoTracking()
+            .AsSingleQuery()
+            .ToListAsync();
+
+        return Result<IEnumerable<LocalizedText>, Error>.Success(localizedTexts);
     }
 }

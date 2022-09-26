@@ -5,5 +5,4 @@ namespace SubtitleRed.Controllers;
 [ApiController]
 public class LineController : ControllerBase
 {
-    
 }

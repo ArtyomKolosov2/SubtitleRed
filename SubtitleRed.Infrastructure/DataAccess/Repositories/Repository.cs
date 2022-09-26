@@ -8,7 +8,7 @@ namespace SubtitleRed.Infrastructure.DataAccess.Repositories;
 internal abstract class Repository<TEntity> where TEntity : Entity
 {
     protected DatabaseContext Context { get; set; }
-    
+
     private DbSet<TEntity> EntitySet => Context.Set<TEntity>();
 
     protected Repository(DatabaseContext context)
@@ -16,7 +16,7 @@ internal abstract class Repository<TEntity> where TEntity : Entity
         Context = context;
     }
 
-    protected async Task<Result<IEnumerable<TEntity>, Error>> GetEntityList() => 
+    protected async Task<Result<IEnumerable<TEntity>, Error>> GetEntityList() =>
         Result<IEnumerable<TEntity>, Error>.Success(await EntitySet.ToListAsync());
 
     protected async Task<Result<TEntity, Error>> GetEntity(Guid id)
@@ -32,7 +32,7 @@ internal abstract class Repository<TEntity> where TEntity : Entity
     {
         var entityEntry = await Context.AddAsync(item);
         await SaveAllAsync();
-        
+
         return Result<TEntity, Error>.Success(entityEntry.Entity);
     }
 
@@ -40,7 +40,7 @@ internal abstract class Repository<TEntity> where TEntity : Entity
     {
         Context.Entry(item).State = EntityState.Modified;
         await SaveAllAsync();
-        
+
         return Result<TEntity, Error>.Success(item);
     }
 
@@ -48,10 +48,10 @@ internal abstract class Repository<TEntity> where TEntity : Entity
     {
         var entityEntry = EntitySet.Remove(item);
         await SaveAllAsync();
-        
+
         return Result<TEntity, Error>.Success(entityEntry.Entity);
     }
 
-    private async Task SaveAllAsync() => 
+    private async Task SaveAllAsync() =>
         await Context.SaveChangesAsync();
 }

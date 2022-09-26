@@ -10,9 +10,9 @@ internal class SceneRepository : Repository<Scene>, ISceneRepository
     {
     }
 
-    public Task<Result<Scene, Error>> GetScene(Guid id) => 
+    public Task<Result<Scene, Error>> GetScene(Guid id) =>
         GetEntity(id);
 
-    public Task<Result<Scene, Error>> CreateScene(Scene scene) => 
+    public Task<Result<Scene, Error>> CreateScene(Scene scene) =>
         CreateEntity(scene);
 }

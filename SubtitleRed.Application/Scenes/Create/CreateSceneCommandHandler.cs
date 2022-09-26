@@ -16,10 +16,10 @@ public class CreateSceneCommandHandler : IRequestHandler<CreateSceneCommand, Res
 
     public async Task<Result<SceneDto, Error>> Handle(CreateSceneCommand request, CancellationToken cancellationToken)
     {
-        return (await _sceneRepository.CreateScene(request.Scene)).Bind(x => Result<SceneDto, Error>.Success(new SceneDto
+        return (await _sceneRepository.CreateScene(request.Scene)).Bind(x => new SceneDto
         {
             Id = x.Id,
             Name = x.Name,
-        }));
+        });
     }
 }

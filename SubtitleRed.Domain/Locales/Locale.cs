@@ -1,4 +1,3 @@
-
 namespace SubtitleRed.Domain.Locales;
 
 public class Locale : Entity
@@ -9,7 +8,7 @@ public class Locale : Entity
         LanguageName = languageName;
     }
 
-    public string TwoLetterCode { get; }
-    
-    public string LanguageName { get; }
+    public string TwoLetterCode { get; init; }
+
+    public string LanguageName { get; init; }
 }

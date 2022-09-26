@@ -9,16 +9,16 @@ namespace SubtitleRed.Infrastructure.Identity.JWT;
 internal class JwtTokenValidatorService : ISecurityTokenValidator
 {
     private readonly IConfiguration _configuration;
-        
+
     public bool CanValidateToken => true;
-        
+
     public int MaximumTokenSizeInBytes { get; set; } = int.MaxValue;
 
     public JwtTokenValidatorService(IConfiguration configuration)
     {
         _configuration = configuration;
     }
-        
+
     public bool CanReadToken(string securityToken) => true;
 
     public ClaimsPrincipal ValidateToken(string securityToken, TokenValidationParameters validationParameters,

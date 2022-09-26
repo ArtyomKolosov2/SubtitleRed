@@ -8,8 +8,9 @@ using SubtitleRed.Shared.Extensions;
 namespace SubtitleRed.Controllers;
 
 [ApiController]
-[AllowAnonymous]
-public class SceneController : ControllerBase
+[Authorize]
+[Route("[controller]/[action]")]
+public class SceneController : BaseApiController
 {
     private readonly IMediator _mediator;
 
@@ -18,13 +19,12 @@ public class SceneController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpPost("CreateScene")]
-    public async Task<ActionResult<SceneDto>> CreateScene(SceneDto scene)
+    [HttpPost]
+    public async Task<IActionResult> Create(SceneDto scene)
     {
         var command = new CreateSceneCommand(scene);
-        return (await _mediator.Send(command)).To(x => new SceneDto
-        {
-            Name = x.Data.Name,
-        });
+        return (await _mediator.Send(command))
+            .Bind(x => new SceneDto { Name = x.Name })
+            .To(GetResponseFromResult);
     }
 }

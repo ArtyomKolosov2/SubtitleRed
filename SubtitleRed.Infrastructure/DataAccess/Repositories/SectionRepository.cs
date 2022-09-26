@@ -19,16 +19,16 @@ internal class SectionRepository : Repository<Section>, ISectionRepository
             .AsSplitQuery()
             .Where(x => x.SceneId == sceneId)
             .ToListAsync();
-        
+
         return Result<IEnumerable<Section>, Error>.Success(result);
     }
 
-    public Task<Result<Section, Error>> GetSection(Guid id) => 
+    public Task<Result<Section, Error>> GetSection(Guid id) =>
         GetEntity(id);
 
-    public Task<Result<Section, Error>> UpdateSection(Section section) => 
+    public Task<Result<Section, Error>> UpdateSection(Section section) =>
         UpdateEntity(section);
 
-    public Task<Result<Section, Error>> CreateSection(Section section) => 
+    public Task<Result<Section, Error>> CreateSection(Section section) =>
         CreateEntity(section);
 }

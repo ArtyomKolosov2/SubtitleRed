@@ -26,7 +26,7 @@ public static class IdentityConfiguration
                 opts.User.RequireUniqueEmail = true;
             })
             .AddEntityFrameworkStores<IdentityDatabaseContext>();
-        
+
         serviceCollection.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -39,9 +39,9 @@ public static class IdentityConfiguration
                 var validator = new JwtTokenValidatorService(configuration);
                 x.SecurityTokenValidators.Add(validator);
             });
-        
+
         serviceCollection.AddAuthorization();
-        serviceCollection.AddScoped<JwtGenerator>();
+        serviceCollection.AddScoped<IJwtGenerator, JwtGenerator>();
 
         return serviceCollection;
     }

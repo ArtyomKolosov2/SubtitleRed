@@ -20,7 +20,7 @@ public static class IdentityRolesInitializer
     private static async Task EnsureRoleCreated(RoleManager<IdentityRole<Guid>> roleManager, string roleName)
     {
         var isRoleExists = await roleManager.RoleExistsAsync(roleName);
-            
+
         if (!isRoleExists)
             await roleManager.CreateAsync(new IdentityRole<Guid> { Name = roleName });
     }
