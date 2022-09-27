@@ -44,4 +44,6 @@ using var scope = app.Services.CreateScope();
 var role = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
 await IdentityRolesInitializer.EnsureStandardRolesCreated(role);
 
-app.Run();
+await app.RunAsync();
+
+public partial class Program { }
