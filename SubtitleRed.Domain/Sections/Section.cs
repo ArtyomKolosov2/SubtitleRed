@@ -9,14 +9,14 @@ public class Section : Entity
         
     }
     
-    public Section(ILineCollection line, string name, Guid sceneId)
+    /*public Section(ILineCollection line, string name, Guid sceneId)
     {
         Line = line;
         Name = name;
         SceneId = sceneId;
-    }
+    }*/
 
-    public ILineCollection Line { get; init; }
+    public List<Line> Lines { get; init; }
 
     public string Name { get; init; }
 

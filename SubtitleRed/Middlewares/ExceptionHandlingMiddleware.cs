@@ -1,4 +1,6 @@
-﻿namespace SubtitleRed.Middlewares;
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace SubtitleRed.Middlewares;
 
 public class ExceptionHandlingMiddleware
 {
@@ -17,9 +19,14 @@ public class ExceptionHandlingMiddleware
         }
         catch (Exception e)
         {
-            // ToDo Define policy for errors and create error response dto.
+            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            await context.Response.WriteAsJsonAsync(new ProblemDetails
+            {
+                Detail = e.Message,
+                Status = StatusCodes.Status500InternalServerError
+            });
+            
             Console.WriteLine(e);
-            throw;
         }
     }
 }

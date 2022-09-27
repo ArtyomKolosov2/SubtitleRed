@@ -9,13 +9,13 @@ public class Scene : Entity
         
     }
     
-    public Scene(string name, SectionCollection section)
+    public Scene(string name, SectionCollection sections)
     {
         Name = name;
-        Section = section;
+        Sections = sections;
     }
 
     public string Name { get; init; }
 
-    public SectionCollection Section { get; init; }
+    public SectionCollection Sections { get; init; }
 }

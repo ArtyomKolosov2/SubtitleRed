@@ -7,6 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="EntityFramework" Version="6.4.4" />
+        <PackageReference Include="Mapster" Version="7.3.0" />
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.9" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.9" />
@@ -24,10 +26,6 @@
     <ItemGroup>
         <ProjectReference Include="..\SubtitleRed.Application\SubtitleRed.Application.csproj" />
         <ProjectReference Include="..\SubtitleRed.Domain\SubtitleRed.Domain.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Mapping" />
     </ItemGroup>
 
 </Project>

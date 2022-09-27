@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SubtitleRed.Domain.Lines;
-using SubtitleRed.Domain.Locales;
 using SubtitleRed.Domain.Scenes;
 using SubtitleRed.Domain.Sections;
 
@@ -13,8 +12,6 @@ public static class RepositoriesConfiguration
         serviceCollection.AddScoped<ISceneRepository, SceneRepository>();
         serviceCollection.AddScoped<ISectionRepository, SectionRepository>();
         serviceCollection.AddScoped<ILineRepository, LineRepository>();
-        serviceCollection.AddScoped<ILocaleRepository, LocaleRepository>();
-        serviceCollection.AddScoped<ILocalizedTextRepository, LocalizedTextRepository>();
 
         return serviceCollection;
     }

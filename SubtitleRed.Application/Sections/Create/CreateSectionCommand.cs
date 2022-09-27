@@ -1,5 +1,16 @@
-﻿namespace SubtitleRed.Application.Sections.Create;
+﻿using Mapster;
+using MediatR;
+using SubtitleRed.Domain.Sections;
+using SubtitleRed.Shared;
 
-public class CreateSectionCommand
+namespace SubtitleRed.Application.Sections.Create;
+
+public class CreateSectionCommand : IRequest<Result<SectionDto, Error>>
 {
+    public Section Section { get; }
+
+    public CreateSectionCommand(SectionDto sectionDto)
+    {
+        Section = sectionDto.Adapt<Section>();
+    }
 }

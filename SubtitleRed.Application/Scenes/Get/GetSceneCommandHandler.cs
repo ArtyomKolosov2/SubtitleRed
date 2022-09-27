@@ -1,5 +1,20 @@
-﻿namespace SubtitleRed.Application.Scenes.Get;
+﻿using Mapster;
+using MediatR;
+using SubtitleRed.Domain.Scenes;
+using SubtitleRed.Shared;
+using SubtitleRed.Shared.Extensions;
 
-public class GetSceneCommandHandler
+namespace SubtitleRed.Application.Scenes.Get;
+
+public class GetSceneCommandHandler : IRequestHandler<GetSceneCommand, Result<SceneDto, Error>>
 {
+    private readonly ISceneRepository _sceneRepository;
+
+    public GetSceneCommandHandler(ISceneRepository sceneRepository)
+    {
+        _sceneRepository = sceneRepository;
+    }
+    
+    public async Task<Result<SceneDto, Error>> Handle(GetSceneCommand request, CancellationToken cancellationToken) => 
+        (await _sceneRepository.GetScene(request.Id)).Bind(x => x.Adapt<SceneDto>());
 }

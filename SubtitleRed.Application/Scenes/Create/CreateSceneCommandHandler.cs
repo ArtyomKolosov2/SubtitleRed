@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Mapster;
+using MediatR;
 using SubtitleRed.Domain.Scenes;
 using SubtitleRed.Shared;
 using SubtitleRed.Shared.Extensions;
@@ -14,12 +15,6 @@ public class CreateSceneCommandHandler : IRequestHandler<CreateSceneCommand, Res
         _sceneRepository = sceneRepository;
     }
 
-    public async Task<Result<SceneDto, Error>> Handle(CreateSceneCommand request, CancellationToken cancellationToken)
-    {
-        return (await _sceneRepository.CreateScene(request.Scene)).Bind(x => new SceneDto
-        {
-            Id = x.Id,
-            Name = x.Name,
-        });
-    }
+    public async Task<Result<SceneDto, Error>> Handle(CreateSceneCommand request, CancellationToken cancellationToken) => 
+        (await _sceneRepository.CreateScene(request.Scene)).Bind(x => x.Adapt<SceneDto>());
 }

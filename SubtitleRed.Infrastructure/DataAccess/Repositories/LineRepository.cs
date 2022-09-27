@@ -18,4 +18,7 @@ internal class LineRepository : Repository<Line>, ILineRepository
 
     public Task<Result<Line, Error>> UpdateLine(Line line) => 
         UpdateEntity(line);
+
+    public Task<Result<Line, Error>> DeleteLine(Line line) => 
+        DeleteEntity(line);
 }

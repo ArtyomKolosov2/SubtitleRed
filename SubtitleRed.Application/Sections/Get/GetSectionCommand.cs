@@ -1,5 +1,14 @@
-﻿namespace SubtitleRed.Application.Sections.Get;
+﻿using MediatR;
+using SubtitleRed.Shared;
 
-public class GetSectionCommand
+namespace SubtitleRed.Application.Sections.Get;
+
+public class GetSectionCommand : IRequest<Result<SectionDto, Error>>
 {
+    public Guid Id { get; }
+
+    public GetSectionCommand(Guid id)
+    {
+        Id = id;
+    }
 }

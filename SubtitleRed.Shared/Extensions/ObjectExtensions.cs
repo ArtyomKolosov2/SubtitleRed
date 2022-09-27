@@ -2,22 +2,19 @@
 
 public static class ObjectExtensions
 {
-    public static TObject Do<TObject>(this object @object, Func<TObject, TObject> func) where TObject : class
+    public static TObject Do<TObject>(this TObject value, Action<TObject> action)
     {
-        var value = (TObject)@object;
-        return func.Invoke(value);
-    }
-
-    public static TObject Do<TObject>(this object @object, Action<TObject> func) where TObject : class
-    {
-        var value = (TObject)@object;
-        func.Invoke(value);
+        action.Invoke(value);
         return value;
     }
 
-    public static TCast To<TCast, TObject>(this object @object, Func<TObject, TCast> func) where TCast : class
+    public static TResult To<TObject, TResult>(this TObject value, Func<TObject, TResult> map) => map.Invoke(value);
+    
+    public static TCast To<TCast>(this object value) => (TCast) value;
+    
+    public static TObject Do<TObject, TState>(this TObject value, TState state, Action<TObject, TState> action)
     {
-        var value = (TObject)@object;
-        return func.Invoke(value);
+        action.Invoke(value, state);
+        return value;
     }
 }

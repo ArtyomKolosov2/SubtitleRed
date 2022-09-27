@@ -1,5 +1,3 @@
-using SubtitleRed.Domain.Locales;
-
 namespace SubtitleRed.Domain.Lines;
 
 public class Line : Entity
@@ -9,7 +7,7 @@ public class Line : Entity
         
     }
     
-    public Line(string speaker, LocalizedTextCollection text, Guid sectionId)
+    public Line(string speaker, string text, Guid sectionId)
     {
         Speaker = speaker;
         Text = text;
@@ -18,7 +16,7 @@ public class Line : Entity
 
     public string Speaker { get; init; }
 
-    public LocalizedTextCollection Text { get; init; }
+    public string Text { get; init; }
 
     public Guid SectionId { get; init; }
 }

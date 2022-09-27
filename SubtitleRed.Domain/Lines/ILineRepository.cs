@@ -9,4 +9,6 @@ public interface ILineRepository
     Task<Result<Line, Error>> GetLine(Guid id);
 
     Task<Result<Line, Error>> UpdateLine(Line line);
+    
+    Task<Result<Line, Error>> DeleteLine(Line line);
 }

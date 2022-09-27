@@ -11,4 +11,6 @@ public interface ISectionRepository
     Task<Result<Section, Error>> UpdateSection(Section section);
 
     Task<Result<Section, Error>> CreateSection(Section section);
+    
+    Task<Result<Section, Error>> DeleteSection(Section section);
 }

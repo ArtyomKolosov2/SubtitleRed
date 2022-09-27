@@ -31,4 +31,7 @@ internal class SectionRepository : Repository<Section>, ISectionRepository
 
     public Task<Result<Section, Error>> CreateSection(Section section) =>
         CreateEntity(section);
+
+    public Task<Result<Section, Error>> DeleteSection(Section section) => 
+        DeleteEntity(section);
 }

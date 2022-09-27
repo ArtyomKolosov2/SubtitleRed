@@ -10,4 +10,6 @@ public class SectionDto
     [Required] public string? Name { get; set; }
 
     [Required] public IEnumerable<LineDto>? Lines { get; set; }
+    
+    [Required] public Guid SceneId { get; set; }
 }

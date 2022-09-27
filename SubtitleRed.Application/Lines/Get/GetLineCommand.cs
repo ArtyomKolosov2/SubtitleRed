@@ -1,5 +1,14 @@
-﻿namespace SubtitleRed.Application.Lines.Get;
+﻿using MediatR;
+using SubtitleRed.Shared;
 
-public class GetLineCommand
+namespace SubtitleRed.Application.Lines.Get;
+
+public class GetLineCommand : IRequest<Result<LineDto, Error>>
 {
+    public Guid Id { get; }
+
+    public GetLineCommand(Guid id)
+    {
+        Id = id;
+    }
 }

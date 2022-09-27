@@ -1,5 +1,14 @@
-﻿namespace SubtitleRed.Application.Scenes.Get;
+﻿using MediatR;
+using SubtitleRed.Shared;
 
-public class GetSceneCommand
+namespace SubtitleRed.Application.Scenes.Get;
+
+public class GetSceneCommand : IRequest<Result<SceneDto, Error>>
 {
+    public Guid Id { get; }
+
+    public GetSceneCommand(Guid id)
+    {
+        Id = id;
+    }
 }
