@@ -1,4 +1,5 @@
 ﻿using Flurl.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using SubtitleRed.Infrastructure.DataAccess.Context;
@@ -11,17 +12,24 @@ public class IntegrationTestFixture: IDisposable, IAsyncDisposable
     private readonly TestApplicationFactory<Program> _webApplicationFactory;
     private readonly HttpClient _httpClient;
     private readonly TestServer _server;
+    private readonly IServiceScope _scope;
     public DatabaseContext DatabaseContext { get; init; }
-
+    
     public IntegrationTestFixture()
     {
         _webApplicationFactory = new TestApplicationFactory<Program>();
         _httpClient = _webApplicationFactory.CreateDefaultClient();
         _server = _webApplicationFactory.Server;
-        using var scope = _webApplicationFactory.Services.CreateScope();
-        DatabaseContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>() ?? throw new ArgumentNullException();
+        
+        _scope = _webApplicationFactory.Services.CreateScope();
+        
+        DatabaseContext = GetService<DatabaseContext>();
+
         FlurlHttp.Configure(settings => { settings.FlurlClientFactory = new TestClientFactory(_httpClient); });
     }
+
+    public TService GetService<TService>() where TService : notnull => 
+        _scope.ServiceProvider.GetRequiredService<TService>();
 
     public async ValueTask DisposeAsync()
     {
@@ -29,8 +37,9 @@ public class IntegrationTestFixture: IDisposable, IAsyncDisposable
         await _webApplicationFactory.DisposeAsync();
         
         _httpClient.Dispose();
+        _scope.Dispose();
         _server.Dispose();
     }
-
+    
     public async void Dispose() => await DisposeAsync();
 }

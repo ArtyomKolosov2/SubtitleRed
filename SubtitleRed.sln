@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitleRed.Tests", "Subtit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.EnvironmentBuilder", "Tests.EnvironmentBuilder\Tests.EnvironmentBuilder.csproj", "{E5160445-EBE8-4C4B-AD57-C8E458CF37E2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{0761E7AD-3B99-480C-895D-B7BE7984D91D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

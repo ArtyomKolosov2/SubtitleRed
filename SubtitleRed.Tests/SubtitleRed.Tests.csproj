@@ -27,7 +27,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Lines" />
       <Folder Include="Scenes" />
       <Folder Include="Sections" />
     </ItemGroup>

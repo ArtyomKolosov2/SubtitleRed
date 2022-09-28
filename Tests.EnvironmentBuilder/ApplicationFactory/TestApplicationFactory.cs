@@ -20,19 +20,15 @@ public class TestApplicationFactory<TStartup> : WebApplicationFactory<TStartup> 
             services.Remove(databaseDescriptor);
             services.Remove(identityDatabaseDescriptor);
             
-            var sp = new ServiceCollection().AddEntityFrameworkInMemoryDatabase().BuildServiceProvider();
-            
             services.AddDbContext<DatabaseContext>(options =>
             {
                 options.UseInMemoryDatabase("InMemoryDbForTesting");
-                options.UseInternalServiceProvider(sp);
             });
             services.AddDbContext<IdentityDatabaseContext>(options =>
             {
                 options.UseInMemoryDatabase("InMemoryIdentityDbForTesting");
-                options.UseInternalServiceProvider(sp);
             });
-
+   
             var serviceProvider = services.BuildServiceProvider();
 
             using var scope = serviceProvider.CreateScope();
