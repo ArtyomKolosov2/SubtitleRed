@@ -25,8 +25,6 @@ public class ExceptionHandlingMiddleware
                 Detail = e.Message,
                 Status = StatusCodes.Status500InternalServerError
             });
-            
-            Console.WriteLine(e);
         }
     }
 }

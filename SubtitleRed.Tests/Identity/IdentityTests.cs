@@ -39,8 +39,9 @@ public class IdentityTests : IntegrationTestsBase
             Password = password,
             Login = $"random_{RandomNumberGenerator.GetInt32(100_000)}"
         };
-
+        
         await SignupUrl.PostJsonAsync(signupRequestDto);
+            
         var loginRequestDto = new LoginRequestDto
         {
             Email = email,

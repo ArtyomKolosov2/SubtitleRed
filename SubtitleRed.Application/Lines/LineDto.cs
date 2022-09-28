@@ -11,4 +11,8 @@ public class LineDto
     [Required] public string? Text { get; set; }
 
     [Required] public Guid SectionId { get; set; }
+    
+    [Required]
+    [Range(0, Int32.MaxValue)]
+    public int LineOrder { get; set; }
 }

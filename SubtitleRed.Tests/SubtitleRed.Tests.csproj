@@ -26,9 +26,4 @@
       <ProjectReference Include="..\Tests.EnvironmentBuilder\Tests.EnvironmentBuilder.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Scenes" />
-      <Folder Include="Sections" />
-    </ItemGroup>
-
 </Project>

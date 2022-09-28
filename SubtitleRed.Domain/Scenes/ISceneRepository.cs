@@ -11,4 +11,6 @@ public interface ISceneRepository
     Task<Result<Scene, Error>> UpdateScene(Scene scene);
     
     Task<Result<Scene, Error>> DeleteScene(Scene scene);
+
+    Task<Result<IEnumerable<Scene>, Error>> GetAllScenes();
 }

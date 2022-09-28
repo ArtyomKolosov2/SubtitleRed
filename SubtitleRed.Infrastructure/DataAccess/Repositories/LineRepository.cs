@@ -6,7 +6,7 @@ namespace SubtitleRed.Infrastructure.DataAccess.Repositories;
 
 internal class LineRepository : Repository<Line>, ILineRepository
 {
-    public LineRepository(DatabaseContext context) : base(context)
+    public LineRepository(DatabaseContext databaseContext) : base(databaseContext)
     {
     }
 

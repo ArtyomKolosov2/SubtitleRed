@@ -41,4 +41,9 @@ public class SceneController : BaseApiController
     public async Task<IActionResult> Delete(Guid id) =>
         (await _mediator.Send(new DeleteSceneCommand(id)))
         .To(GetResponseFromResult);
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll() =>
+        (await _mediator.Send(new GetSceneListCommand()))
+        .To(GetResponseFromResult);
 }

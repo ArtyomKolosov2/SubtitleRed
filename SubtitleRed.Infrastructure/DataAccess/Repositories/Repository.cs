@@ -7,13 +7,13 @@ namespace SubtitleRed.Infrastructure.DataAccess.Repositories;
 
 internal abstract class Repository<TEntity> where TEntity : Entity
 {
-    protected DatabaseContext Context { get; set; }
+    protected DatabaseContext DatabaseContext { get; set; }
 
-    private DbSet<TEntity> EntitySet => Context.Set<TEntity>();
+    private DbSet<TEntity> EntitySet => DatabaseContext.Set<TEntity>();
 
-    protected Repository(DatabaseContext context)
+    protected Repository(DatabaseContext databaseContext)
     {
-        Context = context;
+        DatabaseContext = databaseContext;
     }
 
     protected async Task<Result<IEnumerable<TEntity>, Error>> GetEntityList() =>
@@ -30,28 +30,52 @@ internal abstract class Repository<TEntity> where TEntity : Entity
 
     protected async Task<Result<TEntity, Error>> CreateEntity(TEntity item)
     {
-        var entityEntry = await Context.AddAsync(item);
-        await SaveAllAsync();
+        try
+        {
+            var entityEntry = await DatabaseContext.AddAsync(item);
+            await SaveAllAsync();
 
-        return Result<TEntity, Error>.Success(entityEntry.Entity);
+            return Result<TEntity, Error>.Success(entityEntry.Entity);
+        }
+        catch (Exception e)
+        {
+            return Result<TEntity, Error>.Failure(Error.WithException(e));
+        }
     }
 
     protected async Task<Result<TEntity, Error>> UpdateEntity(TEntity item)
     {
-        Context.Entry(item).State = EntityState.Modified;
-        await SaveAllAsync();
+        try
+        {
+            EntitySet.Attach(item);
 
-        return Result<TEntity, Error>.Success(item);
+            var entry = DatabaseContext.Entry(item);
+            entry.State = EntityState.Modified;
+            await SaveAllAsync();
+            
+            return Result<TEntity, Error>.Success(entry.Entity);
+        }
+        catch (Exception e)
+        {
+            return Result<TEntity, Error>.Failure(Error.WithException(e));
+        }
     }
 
     protected async Task<Result<TEntity, Error>> DeleteEntity(TEntity item)
     {
-        var entityEntry = EntitySet.Remove(item);
-        await SaveAllAsync();
+        try
+        {
+            var entityEntry = EntitySet.Remove(item);
+            await SaveAllAsync();
 
-        return Result<TEntity, Error>.Success(entityEntry.Entity);
+            return Result<TEntity, Error>.Success(entityEntry.Entity);
+        }
+        catch (Exception e)
+        {
+            return Result<TEntity, Error>.Failure(Error.WithException(e));
+        }
     }
 
     private async Task SaveAllAsync() =>
-        await Context.SaveChangesAsync();
+        await DatabaseContext.SaveChangesAsync();
 }

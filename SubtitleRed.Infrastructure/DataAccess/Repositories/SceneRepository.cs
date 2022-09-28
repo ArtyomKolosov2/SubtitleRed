@@ -30,7 +30,7 @@ internal class SceneRepository : Repository<Scene>, ISceneRepository
         }
         catch (Exception exception)
         {
-            return Result<Scene, Error>.Failure(new Error { Exception = exception });
+            return Result<Scene, Error>.Failure(Error.WithException(exception));
         }
     }
 
@@ -43,4 +43,23 @@ internal class SceneRepository : Repository<Scene>, ISceneRepository
     public Task<Result<Scene, Error>> DeleteScene(Scene scene) => 
         DeleteEntity(scene);
 
+    public async Task<Result<IEnumerable<Scene>, Error>> GetAllScenes()
+    {
+        try
+        {
+            var scenes = await _databaseContext.Scenes
+                .AsQueryable()
+                .AsSplitQuery()
+                .AsNoTracking()
+                .Include(x => x.Sections)
+                .ThenInclude(x => x.Lines)
+                .ToListAsync();
+
+            return Result<IEnumerable<Scene>, Error>.Success(scenes);
+        }
+        catch (Exception exception)
+        {
+            return Result<IEnumerable<Scene>, Error>.Failure(Error.WithException(exception));
+        }
+    }
 }

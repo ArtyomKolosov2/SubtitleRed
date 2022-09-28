@@ -9,7 +9,11 @@ public class SectionDto
 
     [Required] public string? Name { get; set; }
 
-    [Required] public IEnumerable<LineDto>? Lines { get; set; }
+    public IEnumerable<LineDto>? Lines { get; set; }
     
     [Required] public Guid SceneId { get; set; }
+    
+    [Required]
+    [Range(0, Int32.MaxValue)]
+    public int SectionOrder { get; set; }
 }

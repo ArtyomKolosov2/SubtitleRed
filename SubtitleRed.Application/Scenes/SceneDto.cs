@@ -9,5 +9,5 @@ public class SceneDto
 
     [Required] public string? Name { get; set; }
 
-    [Required] public IEnumerable<SectionDto>? Sections { get; set; }
+    public IEnumerable<SectionDto>? Sections { get; set; }
 }

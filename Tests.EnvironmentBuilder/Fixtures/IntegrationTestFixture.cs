@@ -1,5 +1,4 @@
 ﻿using Flurl.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using SubtitleRed.Infrastructure.DataAccess.Context;
@@ -22,9 +21,7 @@ public class IntegrationTestFixture: IDisposable, IAsyncDisposable
         _server = _webApplicationFactory.Server;
         
         _scope = _webApplicationFactory.Services.CreateScope();
-        
         DatabaseContext = GetService<DatabaseContext>();
-
         FlurlHttp.Configure(settings => { settings.FlurlClientFactory = new TestClientFactory(_httpClient); });
     }
 

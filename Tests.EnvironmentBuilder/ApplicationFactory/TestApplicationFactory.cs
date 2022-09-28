@@ -22,11 +22,11 @@ public class TestApplicationFactory<TStartup> : WebApplicationFactory<TStartup> 
             
             services.AddDbContext<DatabaseContext>(options =>
             {
-                options.UseInMemoryDatabase("InMemoryDbForTesting");
+                options.UseInMemoryDatabase($"Database");
             });
             services.AddDbContext<IdentityDatabaseContext>(options =>
             {
-                options.UseInMemoryDatabase("InMemoryIdentityDbForTesting");
+                options.UseInMemoryDatabase($"IdentityDatabase");
             });
    
             var serviceProvider = services.BuildServiceProvider();

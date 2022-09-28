@@ -14,7 +14,7 @@ public static class MapsterConfiguration
 {
     public static void ConfigureMapster(this IServiceCollection serviceCollection)
     {
-        TypeAdapterConfig<Scene, SceneDto>
+        /*TypeAdapterConfig<Scene, SceneDto>
             .NewConfig()
             .TwoWays();
         
@@ -26,6 +26,6 @@ public static class MapsterConfiguration
             .NewConfig()
             .TwoWays();
 
-        TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetExecutingAssembly());
+        TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetExecutingAssembly());*/
     }
 }

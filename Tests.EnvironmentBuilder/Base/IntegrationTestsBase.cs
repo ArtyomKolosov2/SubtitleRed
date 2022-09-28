@@ -2,15 +2,18 @@ using System.Security.Cryptography;
 using FluentAssertions;
 using Flurl.Http;
 using Microsoft.AspNetCore.Identity;
-using SubtitleRed.Infrastructure.Identity;
 using SubtitleRed.Infrastructure.Identity.Signup;
 using Tests.EnvironmentBuilder.Fixtures;
 using Xunit;
 
 namespace Tests.EnvironmentBuilder.Base;
 
-public class IntegrationTestsBase : IAsyncLifetime, IClassFixture<IntegrationTestFixture>
+public class IntegrationTestsBase : IClassFixture<IntegrationTestFixture>
 {
+    protected const string CreateUrl = "Create";
+    protected const string GetUrl = "Get";
+    protected const string UpdateUrl = "Update";
+    protected const string Delete = "Delete";
     private const string SignupUrl = "Signup";
     
     protected IntegrationTestFixture TestFixture { get; }
@@ -40,13 +43,4 @@ public class IntegrationTestsBase : IAsyncLifetime, IClassFixture<IntegrationTes
 
         return response.Token;
     }
-
-    #region TestSetup
-
-    public Task InitializeAsync() => Task.CompletedTask;
-
-    public Task DisposeAsync() => TestFixture.DatabaseContext.DisposeAsync().AsTask();
-
-    #endregion
-        
 }
