@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Identity;
 using SubtitleRed.Infrastructure.DataAccess;
 using SubtitleRed.Infrastructure.DataAccess.Repositories;
 using SubtitleRed.Infrastructure.Identity;
-using SubtitleRed.Infrastructure.Mapping;
 using SubtitleRed.Infrastructure.Mediatr;
 using SubtitleRed.Infrastructure.Swagger;
 using SubtitleRed.Middlewares;
@@ -18,8 +17,7 @@ builder.Services
     .ConfigureMediatr()
     .ConfigureDatabase(builder.Configuration)
     .ConfigureRepositories()
-    .ConfigureSwagger()
-    .ConfigureMapster();
+    .ConfigureSwagger();
 
 builder.Services.AddEndpointsApiExplorer();
 
