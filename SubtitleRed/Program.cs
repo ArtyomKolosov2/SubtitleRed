@@ -21,7 +21,6 @@ builder.Services
     .ConfigureRepositories()
     .ConfigureSwagger();
 
-builder.Services.AddCors();
 builder.Services.AddLogging();
 builder.Services.AddEndpointsApiExplorer();
 
@@ -31,17 +30,15 @@ var app = builder.Build();
 using var scope = app.Services.CreateScope();
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    
     var loggerFactory = scope.ServiceProvider.GetRequiredService<ILoggerFactory>();
     var databaseContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
     await TestDataSeedHelper.SeedTestDataFromJson(databaseContext, loggerFactory.CreateLogger(typeof(TestDataSeedHelper)));
 }
 
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
-app.UseCors(policyBuilder => policyBuilder.AllowAnyOrigin().AllowAnyHeader().Build());
 
 app.UseAuthentication();
 app.UseAuthorization();

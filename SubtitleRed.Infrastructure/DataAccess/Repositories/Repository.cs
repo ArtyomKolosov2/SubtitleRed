@@ -51,9 +51,9 @@ internal abstract class Repository<TEntity> where TEntity : Entity
             item.SetIdWithResult(id);
             var entity = EntitySet.Attach(item);
 
-            return await (entity.To(x => entity.Entity is null
+            return await entity.To(x => entity.Entity is null
                 ? Result<TEntity, Error>.Failure(Error.WithMessage("Entity with specified id isn't found"))
-                : Result<TEntity, Error>.Success(entity.Entity)).BindAsync(UpdateEntityState));
+                : Result<TEntity, Error>.Success(entity.Entity)).BindAsync(UpdateEntityState);
         }
         catch (Exception e)
         {
