@@ -5,7 +5,7 @@ using SubtitleRed.Shared;
 
 namespace SubtitleRed.Application.Sections.Create;
 
-public class CreateSectionCommand : IRequest<Result<SectionDto, Error>>
+public class CreateSectionCommand : IRequest<Result<SectionReadDto, Error>>
 {
     public Section Section { get; }
 

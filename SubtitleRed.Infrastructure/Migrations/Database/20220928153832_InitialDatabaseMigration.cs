@@ -16,10 +16,7 @@ namespace SubtitleRed.Infrastructure.Migrations.Database
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Scenes", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Scenes", x => x.Id); });
 
             migrationBuilder.CreateTable(
                 name: "Sections",

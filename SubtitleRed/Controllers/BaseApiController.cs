@@ -16,7 +16,7 @@ public class BaseApiController : ControllerBase
         var _ => GetInternalErrorResponse()
     };
 
-    private ObjectResult GetInternalErrorResponse() => 
+    private ObjectResult GetInternalErrorResponse() =>
         Problem("Internal server error.", statusCode: StatusCodes.Status500InternalServerError);
 
     private IActionResult CreateProblemResponseByErrorException(Error error) => error.Exception switch

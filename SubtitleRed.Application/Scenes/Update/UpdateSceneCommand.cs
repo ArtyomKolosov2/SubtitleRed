@@ -5,12 +5,14 @@ using SubtitleRed.Shared;
 
 namespace SubtitleRed.Application.Scenes.Update;
 
-public class UpdateSceneCommand : IRequest<Result<SceneDto, Error>>
+public class UpdateSceneCommand : IRequest<Result<SceneReadDto, Error>>
 {
+    public Guid Id { get; }
     public Scene Scene { get; }
-    
-    public UpdateSceneCommand(SceneDto sceneDto)
+
+    public UpdateSceneCommand(Guid id, SceneDto sceneDto)
     {
+        Id = id;
         Scene = sceneDto.Adapt<Scene>();
     }
 }

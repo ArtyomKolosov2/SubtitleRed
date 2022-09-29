@@ -25,7 +25,7 @@ internal class SceneRepository : Repository<Scene>, ISceneRepository
                 .Include(x => x.Sections)
                 .ThenInclude(x => x.Lines)
                 .SingleAsync(x => x.Id == id);
-            
+
             return Result<Scene, Error>.Success(scene);
         }
         catch (Exception exception)
@@ -37,10 +37,10 @@ internal class SceneRepository : Repository<Scene>, ISceneRepository
     public Task<Result<Scene, Error>> CreateScene(Scene scene) =>
         CreateEntity(scene);
 
-    public Task<Result<Scene, Error>> UpdateScene(Scene scene) => 
-        UpdateEntity(scene);
-    
-    public Task<Result<Scene, Error>> DeleteScene(Scene scene) => 
+    public Task<Result<Scene, Error>> UpdateScene(Guid id, Scene scene) =>
+        UpdateEntity(id, scene);
+
+    public Task<Result<Scene, Error>> DeleteScene(Scene scene) =>
         DeleteEntity(scene);
 
     public async Task<Result<IEnumerable<Scene>, Error>> GetAllScenes()

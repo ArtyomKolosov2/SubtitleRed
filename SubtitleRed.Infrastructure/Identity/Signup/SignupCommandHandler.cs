@@ -30,7 +30,7 @@ public class SignupCommandHandler : IRequestHandler<SignupCommand, Result<Signup
         };
 
         var identityResult = await _userManager.CreateAsync(newUser, request.SignupRequestDto.Password);
-            
+
         if (identityResult.Succeeded)
         {
             await _signInManager.CheckPasswordSignInAsync(newUser, request.SignupRequestDto.Password, false);
@@ -38,7 +38,7 @@ public class SignupCommandHandler : IRequestHandler<SignupCommand, Result<Signup
 
             var signupResponseResult = _jwtGenerator.CreateJwtToken(newUser, await _userManager.GetRolesAsync(newUser))
                 .Bind(token => new SignupResponseDto { Token = token });
-            
+
             return signupResponseResult;
         }
 

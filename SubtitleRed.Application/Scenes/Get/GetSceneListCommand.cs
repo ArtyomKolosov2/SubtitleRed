@@ -4,6 +4,6 @@ using SubtitleRed.Shared;
 
 namespace SubtitleRed.Application.Scenes.Get;
 
-public class GetSceneListCommand : IRequest<Result<IEnumerable<SceneDto>, Error>>
+public class GetSceneListCommand : IRequest<Result<IEnumerable<SceneReadDto>, Error>>
 {
 }

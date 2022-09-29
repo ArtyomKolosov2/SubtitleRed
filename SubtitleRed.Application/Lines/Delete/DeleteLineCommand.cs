@@ -3,7 +3,7 @@ using SubtitleRed.Shared;
 
 namespace SubtitleRed.Application.Lines.Delete;
 
-public class DeleteLineCommand : IRequest<Result<LineDto, Error>>
+public class DeleteLineCommand : IRequest<Result<LineReadDto, Error>>
 {
     public Guid Id { get; }
 

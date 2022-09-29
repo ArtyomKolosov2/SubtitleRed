@@ -44,7 +44,6 @@ public static class SwaggerConfiguration
                     Array.Empty<string>()
                 }
             });
-
         });
 
         return serviceCollection;

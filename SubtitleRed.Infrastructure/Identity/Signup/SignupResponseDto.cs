@@ -1,4 +1,3 @@
-
 namespace SubtitleRed.Infrastructure.Identity.Signup;
 
 public class SignupResponseDto

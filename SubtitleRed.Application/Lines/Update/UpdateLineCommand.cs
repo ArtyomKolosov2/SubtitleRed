@@ -5,12 +5,14 @@ using SubtitleRed.Shared;
 
 namespace SubtitleRed.Application.Lines.Update;
 
-public class UpdateLineCommand : IRequest<Result<LineDto, Error>>
+public class UpdateLineCommand : IRequest<Result<LineReadDto, Error>>
 {
+    public Guid Id { get; }
     public Line Line { get; }
-    
-    public UpdateLineCommand(LineDto lineDto)
+
+    public UpdateLineCommand(Guid id, LineDto lineDto)
     {
+        Id = id;
         Line = lineDto.Adapt<Line>();
     }
 }

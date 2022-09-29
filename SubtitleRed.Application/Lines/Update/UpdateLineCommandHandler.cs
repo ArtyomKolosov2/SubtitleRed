@@ -6,7 +6,7 @@ using SubtitleRed.Shared.Extensions;
 
 namespace SubtitleRed.Application.Lines.Update;
 
-public class UpdateLineCommandHandler : IRequestHandler<UpdateLineCommand, Result<LineDto, Error>>
+public class UpdateLineCommandHandler : IRequestHandler<UpdateLineCommand, Result<LineReadDto, Error>>
 {
     private readonly ILineRepository _lineRepository;
 
@@ -14,7 +14,7 @@ public class UpdateLineCommandHandler : IRequestHandler<UpdateLineCommand, Resul
     {
         _lineRepository = lineRepository;
     }
-    
-    public async Task<Result<LineDto, Error>> Handle(UpdateLineCommand request, CancellationToken cancellationToken) => 
-        (await _lineRepository.UpdateLine(request.Line)).Bind(x => x.Adapt<LineDto>());
+
+    public async Task<Result<LineReadDto, Error>> Handle(UpdateLineCommand request, CancellationToken cancellationToken) =>
+        (await _lineRepository.UpdateLine(request.Id, request.Line)).Bind(x => x.Adapt<LineReadDto>());
 }

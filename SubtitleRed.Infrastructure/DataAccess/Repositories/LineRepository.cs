@@ -10,15 +10,15 @@ internal class LineRepository : Repository<Line>, ILineRepository
     {
     }
 
-    public Task<Result<Line, Error>> CreateLine(Line line) => 
+    public Task<Result<Line, Error>> CreateLine(Line line) =>
         CreateEntity(line);
 
-    public Task<Result<Line, Error>> GetLine(Guid id) => 
+    public Task<Result<Line, Error>> GetLine(Guid id) =>
         GetEntity(id);
 
-    public Task<Result<Line, Error>> UpdateLine(Line line) => 
-        UpdateEntity(line);
+    public Task<Result<Line, Error>> UpdateLine(Guid id, Line line) =>
+        UpdateEntity(id, line);
 
-    public Task<Result<Line, Error>> DeleteLine(Line line) => 
+    public Task<Result<Line, Error>> DeleteLine(Line line) =>
         DeleteEntity(line);
 }

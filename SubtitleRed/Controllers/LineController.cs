@@ -21,7 +21,7 @@ public class LineController : BaseApiController
     {
         _mediator = mediator;
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> Create(LineDto lineDto) =>
         (await _mediator.Send(new CreateLineCommand(lineDto)))
@@ -32,11 +32,11 @@ public class LineController : BaseApiController
         (await _mediator.Send(new GetLineCommand(id)))
         .To(GetResponseFromResult);
 
-    [HttpPut]
-    public async Task<IActionResult> Update([FromBody] LineDto lineDto) =>
-        (await _mediator.Send(new UpdateLineCommand(lineDto)))
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> Update(Guid id, [FromBody] LineDto lineDto) =>
+        (await _mediator.Send(new UpdateLineCommand(id, lineDto)))
         .To(GetResponseFromResult);
-    
+
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id) =>
         (await _mediator.Send(new DeleteLineCommand(id)))

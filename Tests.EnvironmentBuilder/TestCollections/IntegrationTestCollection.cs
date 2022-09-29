@@ -7,4 +7,3 @@ namespace Tests.EnvironmentBuilder.TestCollections;
 public class IntegrationTestCollection : ICollectionFixture<IntegrationTestFixture>
 {
 }
-

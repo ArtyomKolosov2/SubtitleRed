@@ -5,12 +5,14 @@ using SubtitleRed.Shared;
 
 namespace SubtitleRed.Application.Sections.Update;
 
-public class UpdateSectionCommand : IRequest<Result<SectionDto, Error>>
+public class UpdateSectionCommand : IRequest<Result<SectionReadDto, Error>>
 {
+    public Guid Id { get; }
     public Section Section { get; }
-    
-    public UpdateSectionCommand(SectionDto sectionDto)
+
+    public UpdateSectionCommand(Guid id, SectionDto sectionDto)
     {
+        Id = id;
         Section = sectionDto.Adapt<Section>();
     }
 }

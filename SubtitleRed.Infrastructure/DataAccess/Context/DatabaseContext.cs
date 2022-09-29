@@ -12,7 +12,7 @@ public class DatabaseContext : DbContext
     public DbSet<Section> Sections { get; set; }
 
     public DbSet<Line> Lines { get; set; }
-    
+
     public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
     {
     }

@@ -6,7 +6,7 @@ using SubtitleRed.Shared.Extensions;
 
 namespace SubtitleRed.Application.Scenes.Create;
 
-public class CreateSceneCommandHandler : IRequestHandler<CreateSceneCommand, Result<SceneDto, Error>>
+public class CreateSceneCommandHandler : IRequestHandler<CreateSceneCommand, Result<SceneReadDto, Error>>
 {
     private readonly ISceneRepository _sceneRepository;
 
@@ -15,6 +15,6 @@ public class CreateSceneCommandHandler : IRequestHandler<CreateSceneCommand, Res
         _sceneRepository = sceneRepository;
     }
 
-    public async Task<Result<SceneDto, Error>> Handle(CreateSceneCommand request, CancellationToken cancellationToken) => 
-        (await _sceneRepository.CreateScene(request.Scene)).Bind(x => x.Adapt<SceneDto>());
+    public async Task<Result<SceneReadDto, Error>> Handle(CreateSceneCommand request, CancellationToken cancellationToken) =>
+        (await _sceneRepository.CreateScene(request.Scene)).Bind(x => x.Adapt<SceneReadDto>());
 }

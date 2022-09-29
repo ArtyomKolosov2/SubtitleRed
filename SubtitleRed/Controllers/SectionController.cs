@@ -21,7 +21,7 @@ public class SectionController : BaseApiController
     {
         _mediator = mediator;
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> Create(SectionDto sectionDto) =>
         (await _mediator.Send(new CreateSectionCommand(sectionDto)))
@@ -32,11 +32,11 @@ public class SectionController : BaseApiController
         (await _mediator.Send(new GetSectionCommand(id)))
         .To(GetResponseFromResult);
 
-    [HttpPut]
-    public async Task<IActionResult> Update([FromBody] SectionDto sectionDto) =>
-        (await _mediator.Send(new UpdateSectionCommand(sectionDto)))
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> Update(Guid id, [FromBody] SectionDto sectionDto) =>
+        (await _mediator.Send(new UpdateSectionCommand(id, sectionDto)))
         .To(GetResponseFromResult);
-    
+
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id) =>
         (await _mediator.Send(new DeleteSectionCommand(id)))

@@ -12,6 +12,7 @@ public class TestApplicationFactory<TStartup> : WebApplicationFactory<TStartup> 
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
+        builder.UseEnvironment("IntegrationTests");
         builder.ConfigureServices(services =>
         {
             var databaseDescriptor = services.Single(d => d.ServiceType == typeof(DbContextOptions<DatabaseContext>));
@@ -19,16 +20,10 @@ public class TestApplicationFactory<TStartup> : WebApplicationFactory<TStartup> 
 
             services.Remove(databaseDescriptor);
             services.Remove(identityDatabaseDescriptor);
-            
-            services.AddDbContext<DatabaseContext>(options =>
-            {
-                options.UseInMemoryDatabase($"Database");
-            });
-            services.AddDbContext<IdentityDatabaseContext>(options =>
-            {
-                options.UseInMemoryDatabase($"IdentityDatabase");
-            });
-   
+
+            services.AddDbContext<DatabaseContext>(options => { options.UseInMemoryDatabase($"Database"); });
+            services.AddDbContext<IdentityDatabaseContext>(options => { options.UseInMemoryDatabase($"IdentityDatabase"); });
+
             var serviceProvider = services.BuildServiceProvider();
 
             using var scope = serviceProvider.CreateScope();
@@ -39,7 +34,7 @@ public class TestApplicationFactory<TStartup> : WebApplicationFactory<TStartup> 
 
             db.Database.EnsureCreated();
             identityDb.Database.EnsureCreated();
-            
+
             IdentityRolesInitializer.EnsureStandardRolesCreated(roleManagementService).GetAwaiter().GetResult();
         });
     }

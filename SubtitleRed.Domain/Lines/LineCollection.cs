@@ -1,5 +1,6 @@
 using System.Collections;
 using SubtitleRed.Shared;
+using SubtitleRed.Shared.Extensions;
 
 namespace SubtitleRed.Domain.Lines;
 
@@ -14,15 +15,15 @@ public class LineCollection : ILineCollection
     public void CopyTo(Line[] array, int arrayIndex) => _sortedSet.CopyTo(array, arrayIndex);
 
     public bool Remove(Line item) => RemoveLine(item).IsSuccess;
-    
+
     public int Count => _sortedSet.Count;
-    
+
     public bool IsReadOnly => false;
 
     private readonly SortedSet<Line> _sortedSet;
 
     private static Comparer<Line> Comparer => Comparer<Line>.Create((x, y) => x.LineOrder.CompareTo(y.LineOrder));
-    
+
     public LineCollection(IEnumerable<Line> sections)
     {
         _sortedSet = new SortedSet<Line>(sections, Comparer);
@@ -37,11 +38,16 @@ public class LineCollection : ILineCollection
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-    public Result<Line, Error> AddLine(Line section)
+    public Result<Line, Error> AddLine(Line line) => (line switch
     {
-        _sortedSet.Add(section);
-        return Result<Line, Error>.Success(section);
-    }
+        { LineOrder : 0 } => line.SetLineOrder(_sortedSet.Count + 1),
+        { LineOrder : < 0} => Result<int, Error>.Failure(Error.WithMessage("Order value of line was less then zero.")),
+        var _ => Result<int, Error>.Success(line.LineOrder)
+    }).Bind(_ =>
+    {
+        _sortedSet.Add(line);
+        return line;
+    });
 
     public Result<Line, Error> RemoveLine(Line section)
     {

@@ -6,7 +6,7 @@ using SubtitleRed.Shared.Extensions;
 
 namespace SubtitleRed.Application.Lines.Delete;
 
-public class DeleteLineCommandHandler : IRequestHandler<DeleteLineCommand, Result<LineDto, Error>>
+public class DeleteLineCommandHandler : IRequestHandler<DeleteLineCommand, Result<LineReadDto, Error>>
 {
     private readonly ILineRepository _lineRepository;
 
@@ -15,8 +15,8 @@ public class DeleteLineCommandHandler : IRequestHandler<DeleteLineCommand, Resul
         _lineRepository = lineRepository;
     }
 
-    public async Task<Result<LineDto, Error>> Handle(DeleteLineCommand request, CancellationToken cancellationToken) =>
+    public async Task<Result<LineReadDto, Error>> Handle(DeleteLineCommand request, CancellationToken cancellationToken) =>
         (await (await _lineRepository.GetLine(request.Id))
             .BindAsync(x => _lineRepository.DeleteLine(x)))
-        .Bind(line => line.Adapt<LineDto>());
+        .Bind(line => line.Adapt<LineReadDto>());
 }

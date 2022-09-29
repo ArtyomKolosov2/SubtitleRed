@@ -2,6 +2,7 @@
 using SubtitleRed.Domain;
 using SubtitleRed.Infrastructure.DataAccess.Context;
 using SubtitleRed.Shared;
+using SubtitleRed.Shared.Extensions;
 
 namespace SubtitleRed.Infrastructure.DataAccess.Repositories;
 
@@ -43,21 +44,27 @@ internal abstract class Repository<TEntity> where TEntity : Entity
         }
     }
 
-    protected async Task<Result<TEntity, Error>> UpdateEntity(TEntity item)
+    protected async Task<Result<TEntity, Error>> UpdateEntity(Guid id, TEntity item)
     {
         try
         {
-            EntitySet.Attach(item);
+            item.SetIdWithResult(id);
+            var entity = EntitySet.Attach(item);
 
-            var entry = DatabaseContext.Entry(item);
-            entry.State = EntityState.Modified;
-            await SaveAllAsync();
-            
-            return Result<TEntity, Error>.Success(entry.Entity);
+            return await (entity.To(x => entity.Entity is null
+                ? Result<TEntity, Error>.Failure(Error.WithMessage("Entity with specified id isn't found"))
+                : Result<TEntity, Error>.Success(entity.Entity)).BindAsync(UpdateEntityState));
         }
         catch (Exception e)
         {
             return Result<TEntity, Error>.Failure(Error.WithException(e));
+        }
+
+        async Task<TEntity> UpdateEntityState(TEntity entity)
+        {
+            var update = EntitySet.Update(item);
+            await SaveAllAsync();
+            return update.Entity;
         }
     }
 

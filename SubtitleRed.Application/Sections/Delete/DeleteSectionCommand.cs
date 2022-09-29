@@ -3,7 +3,7 @@ using SubtitleRed.Shared;
 
 namespace SubtitleRed.Application.Sections.Delete;
 
-public class DeleteSectionCommand : IRequest<Result<SectionDto, Error>>
+public class DeleteSectionCommand : IRequest<Result<SectionReadDto, Error>>
 {
     public Guid Id { get; }
 

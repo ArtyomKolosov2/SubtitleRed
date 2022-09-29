@@ -15,10 +15,4 @@
         <ProjectReference Include="..\SubtitleRed.Domain\SubtitleRed.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Reference Include="JetBrains.ReSharper.TestRunner.Merged">
-        <HintPath>..\..\..\..\AppData\Local\JetBrains\Rider\r2r\2022.2.3.0.0R\9C3AB30B0E1FBBC69207E11F367A599\TestRunner\netcoreapp3.0\JetBrains.ReSharper.TestRunner.Merged.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-
 </Project>

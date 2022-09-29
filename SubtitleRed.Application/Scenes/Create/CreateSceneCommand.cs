@@ -5,7 +5,7 @@ using SubtitleRed.Shared;
 
 namespace SubtitleRed.Application.Scenes.Create;
 
-public class CreateSceneCommand : IRequest<Result<SceneDto, Error>>
+public class CreateSceneCommand : IRequest<Result<SceneReadDto, Error>>
 {
     public Scene Scene { get; }
 

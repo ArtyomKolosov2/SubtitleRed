@@ -28,14 +28,15 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, Result<LoginRes
         if (user is not null)
         {
             var result = await _signInManager.CheckPasswordSignInAsync(user, request.LoginRequestDto.Password, false);
-                
+
             if (result.Succeeded)
             {
-                 var loginResult = _jwtGenerator.CreateJwtToken(user, await _userManager.GetRolesAsync(user)).Bind(token => new LoginResponseDto
-                 {
-                     Token = token
-                 });
-                 
+                var loginResult = _jwtGenerator.CreateJwtToken(user, await _userManager.GetRolesAsync(user)).Bind(token =>
+                    new LoginResponseDto
+                    {
+                        Token = token
+                    });
+
                 return loginResult;
             }
         }

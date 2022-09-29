@@ -30,13 +30,13 @@ public class SceneController : BaseApiController
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> Get(Guid id) =>
         (await _mediator.Send(new GetSceneCommand(id)))
-            .To(GetResponseFromResult);
+        .To(GetResponseFromResult);
 
-    [HttpPut]
-    public async Task<IActionResult> Update([FromBody] SceneDto sceneDto) =>
-        (await _mediator.Send(new UpdateSceneCommand(sceneDto)))
-            .To(GetResponseFromResult);
-    
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> Update(Guid id, [FromBody] SceneDto sceneDto) =>
+        (await _mediator.Send(new UpdateSceneCommand(id, sceneDto)))
+        .To(GetResponseFromResult);
+
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id) =>
         (await _mediator.Send(new DeleteSceneCommand(id)))

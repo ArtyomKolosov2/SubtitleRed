@@ -3,7 +3,7 @@ using SubtitleRed.Shared;
 
 namespace SubtitleRed.Application.Scenes.Delete;
 
-public class DeleteSceneCommand : IRequest<Result<SceneDto, Error>>
+public class DeleteSceneCommand : IRequest<Result<SceneReadDto, Error>>
 {
     public Guid Id { get; }
 

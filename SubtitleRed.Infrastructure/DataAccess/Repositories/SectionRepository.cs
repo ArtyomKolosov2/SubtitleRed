@@ -46,12 +46,12 @@ internal class SectionRepository : Repository<Section>, ISectionRepository
         }
     }
 
-    public Task<Result<Section, Error>> UpdateSection(Section section) =>
-        UpdateEntity(section);
+    public Task<Result<Section, Error>> UpdateSection(Guid id, Section section) =>
+        UpdateEntity(id, section);
 
     public Task<Result<Section, Error>> CreateSection(Section section) =>
         CreateEntity(section);
 
-    public Task<Result<Section, Error>> DeleteSection(Section section) => 
+    public Task<Result<Section, Error>> DeleteSection(Section section) =>
         DeleteEntity(section);
 }

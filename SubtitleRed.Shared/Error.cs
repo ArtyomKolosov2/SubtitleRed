@@ -10,7 +10,7 @@ public class Error
     {
         Message = message
     };
-    
+
     public static Error WithException(Exception exception) => new Error
     {
         Exception = exception

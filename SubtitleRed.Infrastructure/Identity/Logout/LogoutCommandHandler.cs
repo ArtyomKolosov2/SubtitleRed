@@ -12,10 +12,10 @@ public class LogoutCommandHandler : IRequestHandler<LogoutCommand, Result<Logout
     {
         _signInManager = signInManager;
     }
-    
+
     public async Task<Result<LogoutResponseDto, Error>> Handle(LogoutCommand request, CancellationToken cancellationToken)
     {
         await _signInManager.SignOutAsync();
-        return Result<LogoutResponseDto, Error>.Success(new LogoutResponseDto{Message = "Logout successful."});
+        return Result<LogoutResponseDto, Error>.Success(new LogoutResponseDto { Message = "Logout successful." });
     }
 }

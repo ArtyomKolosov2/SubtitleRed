@@ -7,12 +7,12 @@ namespace SubtitleRed.Infrastructure.DataAccess;
 
 public static class DatabaseConfiguration
 {
-    public static  IServiceCollection ConfigureDatabase(this IServiceCollection serviceCollection, IConfiguration configuration)
+    public static IServiceCollection ConfigureDatabase(this IServiceCollection serviceCollection, IConfiguration configuration)
     {
         var connectionString = configuration["DatabaseSettings:DefaultConnection"];
         serviceCollection.AddDbContext<DatabaseContext>(options =>
             options.UseSqlServer(connectionString, s => s.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
-        
+
         return serviceCollection;
     }
 }

@@ -6,7 +6,7 @@ using SubtitleRed.Shared.Extensions;
 
 namespace SubtitleRed.Application.Scenes.Get;
 
-public class GetSceneListCommandHandler : IRequestHandler<GetSceneListCommand, Result<IEnumerable<SceneDto>, Error>>
+public class GetSceneListCommandHandler : IRequestHandler<GetSceneListCommand, Result<IEnumerable<SceneReadDto>, Error>>
 {
     private readonly ISceneRepository _sceneRepository;
 
@@ -14,7 +14,7 @@ public class GetSceneListCommandHandler : IRequestHandler<GetSceneListCommand, R
     {
         _sceneRepository = sceneRepository;
     }
-    
-    public async Task<Result<IEnumerable<SceneDto>, Error>> Handle(GetSceneListCommand request, CancellationToken cancellationToken) => 
-        (await _sceneRepository.GetAllScenes()).Bind(x => x.Adapt<IEnumerable<SceneDto>>());
+
+    public async Task<Result<IEnumerable<SceneReadDto>, Error>> Handle(GetSceneListCommand request, CancellationToken cancellationToken) =>
+        (await _sceneRepository.GetAllScenes()).Bind(x => x.Adapt<IEnumerable<SceneReadDto>>());
 }

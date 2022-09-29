@@ -6,7 +6,7 @@ using SubtitleRed.Shared.Extensions;
 
 namespace SubtitleRed.Application.Sections.Create;
 
-public class CreateSectionCommandHandler : IRequestHandler<CreateSectionCommand, Result<SectionDto, Error>>
+public class CreateSectionCommandHandler : IRequestHandler<CreateSectionCommand, Result<SectionReadDto, Error>>
 {
     private readonly ISectionRepository _sectionRepository;
 
@@ -14,7 +14,7 @@ public class CreateSectionCommandHandler : IRequestHandler<CreateSectionCommand,
     {
         _sectionRepository = sectionRepository;
     }
-    
-    public async Task<Result<SectionDto, Error>> Handle(CreateSectionCommand request, CancellationToken cancellationToken) => 
-        (await _sectionRepository.CreateSection(request.Section)).Bind(x => x.Adapt<SectionDto>());
+
+    public async Task<Result<SectionReadDto, Error>> Handle(CreateSectionCommand request, CancellationToken cancellationToken) =>
+        (await _sectionRepository.CreateSection(request.Section)).Bind(x => x.Adapt<SectionReadDto>());
 }

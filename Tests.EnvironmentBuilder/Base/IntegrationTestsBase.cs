@@ -15,7 +15,7 @@ public class IntegrationTestsBase : IClassFixture<IntegrationTestFixture>
     protected const string UpdateUrl = "Update";
     protected const string Delete = "Delete";
     private const string SignupUrl = "Signup";
-    
+
     protected IntegrationTestFixture TestFixture { get; }
 
     protected IntegrationTestsBase(IntegrationTestFixture testFixture)

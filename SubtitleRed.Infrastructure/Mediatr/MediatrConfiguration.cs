@@ -24,6 +24,7 @@ public static class MediatrConfiguration
     {
         serviceCollection.AddMediatR(typeof(CreateSceneCommand));
         serviceCollection.AddMediatR(typeof(GetSceneCommand));
+        serviceCollection.AddMediatR(typeof(GetSceneListCommand));
         serviceCollection.AddMediatR(typeof(UpdateSceneCommand));
         serviceCollection.AddMediatR(typeof(DeleteSceneCommand));
 
@@ -31,7 +32,7 @@ public static class MediatrConfiguration
         serviceCollection.AddMediatR(typeof(GetLineCommand));
         serviceCollection.AddMediatR(typeof(UpdateLineCommand));
         serviceCollection.AddMediatR(typeof(DeleteLineCommand));
-        
+
         serviceCollection.AddMediatR(typeof(CreateSectionCommand));
         serviceCollection.AddMediatR(typeof(GetSectionCommand));
         serviceCollection.AddMediatR(typeof(UpdateSectionCommand));

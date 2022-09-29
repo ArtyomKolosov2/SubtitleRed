@@ -9,9 +9,9 @@ public static class ObjectExtensions
     }
 
     public static TResult To<TObject, TResult>(this TObject value, Func<TObject, TResult> map) => map.Invoke(value);
-    
-    public static TCast To<TCast>(this object value) => (TCast) value;
-    
+
+    public static TCast To<TCast>(this object value) => (TCast)value;
+
     public static TObject Do<TObject, TState>(this TObject value, TState state, Action<TObject, TState> action)
     {
         action.Invoke(value, state);

@@ -3,7 +3,7 @@ using SubtitleRed.Shared;
 
 namespace SubtitleRed.Application.Lines.Get;
 
-public class GetLineCommand : IRequest<Result<LineDto, Error>>
+public class GetLineCommand : IRequest<Result<LineReadDto, Error>>
 {
     public Guid Id { get; }
 
