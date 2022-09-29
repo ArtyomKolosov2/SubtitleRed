@@ -21,6 +21,7 @@ builder.Services
     .ConfigureRepositories()
     .ConfigureSwagger();
 
+builder.Services.AddCors();
 builder.Services.AddLogging();
 builder.Services.AddEndpointsApiExplorer();
 
@@ -40,6 +41,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
+app.UseCors(policyBuilder => policyBuilder.AllowAnyOrigin().AllowAnyHeader().Build());
 
 app.UseAuthentication();
 app.UseAuthorization();
